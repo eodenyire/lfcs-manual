@@ -1,1 +1,6 @@
-Testing the first chapter.
+Here I will test the math typestting:
+
+$$\alpha \equiv \beta$$
+
+
+
