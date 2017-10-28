@@ -1,1 +1,6 @@
-$$\alpha \equiv \beta$$
+
+$$
+\alpha \equiv \beta
+$$
+
+
