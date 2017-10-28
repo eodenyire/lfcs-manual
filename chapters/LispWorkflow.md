@@ -138,7 +138,6 @@ You will need to do the copying with `rsync` again. If you do not want to do the
 
 
 ```
-cd ~
 ln -s ~/github/dotfiles/vimrc ~/.vimrc
 ln -s ~/github/dotfiles/vim ~/.vim
 ```
