@@ -1,1 +1,1 @@
-$$\alpha \equiv \beta$$
+Nothing here.
