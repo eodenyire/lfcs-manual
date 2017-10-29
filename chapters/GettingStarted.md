@@ -1,16 +1,14 @@
 Some tests:
 ===========
 
+$$\alpha \equiv \beta$$
 
-{%ace edit=true, lang='lisp'%}
+{%ace edit=false, lang='lisp'%}
 (defun test ()
 	(+ 2 4)
 	)
 {%endace%}
 
 
-$$
-\alpha \equiv \beta
-$$
 
 
