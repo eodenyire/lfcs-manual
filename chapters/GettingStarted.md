@@ -7,7 +7,7 @@ $$\alpha \equiv \beta$$
 
 some more:
 
-{%math%} \alpha \equiv \beta {%endblock%}
+{%math%} \alpha \equiv \beta {%endmath%}
 
 
 some code for test:
