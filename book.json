@@ -1,3 +1,5 @@
 {
-    "plugins": ["katex","ace"]
+    "plugins": ["katex","ace","-highlight","sunglight-highlighter"]
 }
+
+
