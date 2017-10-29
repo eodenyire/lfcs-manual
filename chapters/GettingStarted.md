@@ -21,9 +21,7 @@ test 2
 
 test 3
 
-```clisp
-(defun test ()
-	(+ 2 4)
-	)
+```python
+def test(x, y):
+	return x*y
 ```
-
