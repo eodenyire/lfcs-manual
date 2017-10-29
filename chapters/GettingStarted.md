@@ -1,7 +1,17 @@
 Some tests:
 ===========
 
+Here is some math:
+
 $$\alpha \equiv \beta$$
+
+some more:
+
+{%math%} \alpha \equiv \beta {%endblock%}
+
+
+some code for test:
+
 
 {%ace edit=false, lang='lisp'%}
 (defun test ()
