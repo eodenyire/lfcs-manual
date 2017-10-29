@@ -1,10 +1,16 @@
-<<<<<<< HEAD
-Nothing here.
-=======
+Some tests:
+===========
+
+
+{%ace edit=true lang="lisp"%}
+(defun test ()
+	(+ 2 4)
+	)
+{%end ace%}
+
 
 $$
 \alpha \equiv \beta
 $$
 
 
->>>>>>> fc19046eb103ecfea4970698a61d3cb528d538c0
