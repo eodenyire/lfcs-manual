@@ -10,5 +10,20 @@ $$\alpha \equiv \beta$$
 {%endace%}
 
 
+test 2
 
+
+```lisp
+(defun test ()
+	(+ 2 4)
+	)
+```
+
+test 3
+
+```clisp
+(defun test ()
+	(+ 2 4)
+	)
+```
 
