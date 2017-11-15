@@ -1,7 +1,6 @@
 {
-    "plugins": ["katex","ace","-highlight","sunlight-highlighter"]
-	variables: {
-		server: "`lfcs.ii.metu.edu.tr`"
+	"plugins": ["katex","ace","-highlight","sunlight-highlighter"],
+	"variables": {
+		"server": "`lfcs.ii.metu.edu.tr`"
 	}
 }
-
