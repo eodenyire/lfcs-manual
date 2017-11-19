@@ -8,7 +8,7 @@ Here are the corpora (plural of "corpus") currently available on {{ book.server 
 
 To see where they are stored, check the environment variable `CORPORA_PATH`:
 
-```bash
+```
 echo ${CORPORA_PATH}
 ```
 
@@ -30,13 +30,13 @@ ln -s ${CORPORA_PATH}/MetuTurkishCorpus/mtc-spl-UTF-8.txt  corpus
 You can provide any name you like instead of `corpus`. You may check the count of words, lines and characters in the corpus by the `wc` tool:
 
 
-```bash
+```
 wc corpus
 ```
 
 To see the first 10 lines, do 
 
-```bash
+```
 head corpus
 ```
 
@@ -47,7 +47,7 @@ All NLP-resources, including the corpora, are write-protected, you cannot change
 
 The most straightforward way to search corpora is to use `grep`; the following command searches for lines that contain verbs where the so-called past tense marker `-DI` follows the so-called conditional marker `-sA` in Turkish.
 
-```bash
+```
 egrep '\w+s[ea]yd[iı]' corpus
 ```
 
@@ -55,13 +55,13 @@ Note that we had `egrep`, which is shorthand for `grep -E`.  The matched parts s
 
 If you want to be able to inspect the output by scrolling up and down, pipe the output of `egrep` to `less`; all in action would look like: 
 
-```bash
+```
 egrep --color=always -A 2 -B 2 '\w+s[ea]yd[iı]' corpus | less -r
 ```
 
 To have your results stored in a file, switch of the color and divert to output to a file:
 
-```bash
+```
 egrep --color=never -A 2 -B 2 '\w+s[ea]yd[iı]' corpus > my_results.txt
 ```
 
