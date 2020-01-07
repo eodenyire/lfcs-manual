@@ -1,142 +1,132 @@
-# SmallWorld User's Manual 
+# A Guide to SmallWorld
 
 
 ## How to install 
 
-You need a working `LISP` installation, see [Lisp Workflow](chapaters/LispWorkflow.md).
+You need a working `LISP` on your system, please see [Lisp Workflow](chapaters/LispWorkflow.md) for that.
 
-There are two ways to obtain the program. One is cloning it via `git`, the other is to download it as `zip`. 
-Besides these, you will also need `git` to fetch some configuration files.
+There are two ways to obtain `SmallWorld`: One is cloning it via `git`, the other is to download it as `zip`. 
+For the cloning option you need to have `git` installed. For that do:
 
-If you are working  on `lfcs.ii.metu.edu.tr`, you do not need to install anything. If you are on your own machine, install any missing packages by:
 
 ```bash
-sudo apt-get update
-sudo apt-get install <package-name1> <package-name2> ...
+sudo apt update
+sudo apt install git
 ```
 
+To clone the `SmallWorld` repo, go to your choice of installation  directory and do:
 
-Now we will configure `vim`, so that you can use it efficiently to write and run lisp code. First you need to get necessary stuff, which are located at a `git` repository on `github.com`. Nowadays many people and institutions develop and share their projects on this platform. From time to time you will need to get and contribute content to this platform; therefore I strongly advise to have a github directory somewhere on your account. For the present tutorial let us assume you want to have it under your home folder. First change to your home folder by:
-
-```
-cd ~
-```
-
-The `~` sign stands for your home folder; wherever you are, typing `cd ~` will bring you home. Now create and change into your `github` directory, name is not important. 
-
-```
-mkdir github
-cd github
+```bash
+git clone git@github.com:metu-lfcs/smallworld.git
 ```
 
-Now we will clone the repository we need for customizing `vim` for lisp. 
+This command will create a directory named `smallworld`. Change to the program directory by, 
 
-
-```
-git clone https://github.com/umutozge/dotfiles.git
-```
-
-This command will create a directory named `dotfiles`. If you are new to `vim`, I suggest you do the following:
-
-```
-rsync -av ~/github/dotfiles/vimrc ~/.vimrc
-rsync -av ~/github/dotfiles/vim/ ~/.vim/
+```bash
+cd smallworld/code/
 ```
 
-Be careful to type everything exactly as above; especially the dots are important and easy to miss.
+and do,
 
-If you have some experience in using and customizing `vim`, then what you need for lisp interaction are `screen` plugin and the `lisp.vim` file type plugin. You might also want to check other goodies in my vim configuration tree and `vimrc`. Most probably you would not want to have everything.  
-
-## How to use
-
-Assuming everything worked fine so far, start to edit a Lisp file:
-
-```
-vim test.lisp
+```bash
+chmod u+x main.lisp
 ```
 
-Type a procedure that you would want to evaluate in `sbcl`, e.g.\
+Now you can run `SmallWorld` on the basic exmaple project by,
+
+```bash
+main.lisp prj/basic
+```
+
+## Projects 
+
+Projects are found under the folder `prj`. A project consists of `theory.lisp` and `lexicon.lisp` files. The `lexicon.lisp` file is where you enter your lexicon; inspecting the file `prj/basic/lexicon.lisp` should be enough to understand its syntax. Understanding the function of `theory.lisp` requires having grasped some other concepts.
+
+### Attribute-value matrices 
+
+These are basic, intuitive data records. Here is an example:
 
 ```lisp
-(defun factorial (n)
-  (if (= n 0)
-      1
-      (* n (factorial (- n 1)))))
+((title sir)
+ (name alex)
+ (surname ferguson))
 ```
 
-You will observe that you do not have to do anything to get the indentation right, whenever you create a newline `vim` will decide how much to indent the next line.
+In every ordered pair, the first component is the ''attribute'' and the second is the ''value'' of that attribute. Any collection of such pairs is an ''attribute-value matrix'' (or ''AVM'' for short).
 
-There are two ways of evaluating code. 
+The real interest of attribute-value structures lies in their recursive structure; an attribute has another attribute-value structure as its value. E.g.:
 
-### Evaluation without opening a separate window for `sbcl`
-
-If you do not need to see the code itself while testing it in `sbcl`:
-
-* go to the beginning of the region you want to evaluate;
-* press `V` in normal mode to enter into visual mode;
-* go down to the end of the region;
-* typing `,e` opens up an internal `sbcl` session and evaluates whatever is in the region;
-* when you are done, quit `sbcl` by pressing `Ctrl-D` or evaluating `(exit)`;
-* you are back in `vim`
-
-
-Now you do some more editing. If your additions are all between the start and end of the region you evaluated last, you do not need to select a region again, just type `,,e` -- two commas instead of one -- to switch to `sbcl` for evaluation. It doesn't matter how much the region grows with your additions or shrinks by your deletions, as long as nothing is before the start and after the end of the last selection. If you edit the code beyond the limits of the last selection, you will need to do the visual region selection again.
-
-### Evaluation with opening a separate window for `sbcl`
-
-If you do want to see the code while you work in `sbcl` do this:
-
-* In normal mode type `,s`;
-* This will open a separate window below your editor which runs `sbcl`;
-* Select a region to evaluate as above;
-* This time type `,r` to send the region to `sbcl`;
-* To shift to `sbcl` window type `Ctrl-A` and then `TAB`;
-* When you are finished with `sbcl`, return to `vim` by the same sequence: `Ctrl-A` and then `TAB`.
-
-Whenever you want to close the `sbcl` window, type `,q` in `vim` normal mode.
-
-### Commenting
-
-To comment a region:
-
-* select it;
-* type `,c`
-
-To uncomment a region:
-
-* select it;
-* type `,u`
-
-### Dealing with parentheses
-
-If you open and close a parenthesis without waiting too much in between, the cursor will end up between the parenthesis and in insert mode. This way there is no need to think about closing the parentheses you opened. See  `.vimrc` for other goodies you might find useful.
-
-
-
-## How to update
-
-Please let me know about functionalities you would want to have; so that I integrate them. Whenever there is such an update, you will need to get the updated files. To do this go to the repository directory:
-
-```
-cd ~/github/dotfiles
+```lisp
+((title sir)
+ (name alex)
+ (surname ferguson)
+ (pysique ((height 186cm)
+           (weight 87kg)
+           (color caucasian))))
 ```
 
-Get whatever is updated in the repository by:
 
+### The theory file
 
-```
-git pull origin master
-```
+The function of the `theory.lisp` is to define the basic (or atomic) categories of your grammar/lexicon, i.e. "non-slashed" categories.
+First you define a basic category template, which will be the most general structure of an atomic category.
 
-You will need to do the copying with `rsync` again. If you do not want to do the copying every time there is an update, you may create symbolic links as follows:
-
-
-```
-ln -s ~/github/dotfiles/vimrc ~/.vimrc
-ln -s ~/github/dotfiles/vim ~/.vim
+```lisp
+(base-cat-template ((cat ?_) (agr ?_) (bar ?_)))
 ```
 
-If you have these links, it would be enough to `pull` to update everything.
+This says that each basic category has a `cat`, `agr` and `bar` attribute (linguists prefer ''feature'' over ''attribute''). The basic template leaves the values of these features underspecified. In the notation of `SmallWorld`, symbols starting with a `?` are variables. 
 
-Of course these update methods do not apply if you have your own customization files besides those coming from my repository.
+The second component of a theory is the feature dictionary
 
+```lisp
+(feature-dictionary (agr pl sg)
+                    (cat v n a p m)   
+                    (bar 0 1 2))
+```
+
+This data structure declares that the `agr` feature can have `pl` and `sg` as values, and likewise for other features.
+
+The third part of a theory file is the specification of category bundle symbols. What we write as, for instance `S`, in CCG categories get translated into an AVM according to these specifications:  
+
+```lisp
+(category-bundle-symbols (s (cat v) (bar 1))
+                         (np (cat n) (bar 2))
+                         (adj (cat a) (bar 0))
+                         (ap (cat a) (bar 2))
+                         (n (cat n))
+						 (m (cat m) (bar 2)))
+```
+
+In declaring category bundle symbols you only give the feature-value pairs that you want to be overridden on the base category template.
+
+### Internal representation of categories
+
+`SmallWorld` translates each category it finds in `lexicon.lisp` to its internal representation, which is written to the file `_lexicon.lisp` each time you load a lexicon.
+
+
+Here is an example lexical entry. 
+
+```
+s\np[sg] : (lam x ($ x)) < sleeps walks works talks
+```
+This entry defines the lexical category of 4 words. The `$` in the semantic interpretation gets replaced by the word during the translation into internal representation.
+
+The internal representation of a lexical category is an AVM with three main features: `PHON`, `SYN` and `SEM`. 
+
+```lisp
+((PHON SLEEPS)
+ (SYN
+  ((IN ((CAT N) (AGR SG) (BAR 2)))
+   (DIR BACKWARD)
+   (OUT ((CAT V) (AGR ?_) (BAR 1)))))
+ (SEM (LAM X (SLEEPS X))))
+```
+
+`PHON` feature has the phonetic representation of the lexical item itself. 
+
+`SEM` is either an atom like `JOHN` or a lambda term. Inspecting the example lexicon will clarify how to write lambda terms.
+
+`SYN` is a complex feature which has another AVM as its value. For functional categories like `SLEEPS` above, the value of the `SYN` feature is an AVM with three features: `IN` for the input category, `DIR` for the slash, and `OUT` for the output category.
+
+Studying the example `lexicon.lisp`, `theory.lisp` and the `_lexicon.lisp` generated on the basis of the former two will clarify how the system works.  
